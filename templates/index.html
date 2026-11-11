@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+
+{% block title %}Home | ResumeAI{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div>
+        <span class="tagline">AI POWERED CAREER ASSISTANT</span>
+        <h1>Your Resume.<br>Your Career.<br><span>Enhanced by AI.</span></h1>
+        <p>Analyze your resume, discover skill gaps and understand how well your profile matches your dream job using AI.</p>
+        <a href="{{ url_for('analyze') }}" class="btn">
+        Analyze My Resume →</a>
+    </div>
+
+    <div class="preview-card">
+        <span class="tagline">SAMPLE DASHBOARD</span>
+        <div class="score">85%</div>
+        <h3>Skill Compatibility</h3>
+        <p>✓ Python</p>
+        <p>✓ Machine Learning</p>
+        <p>✓ SQL</p>
+        <p>✕ Docker</p>
+        <small>Illustrative score, not an actual analysis.</small>
+    </div>
+</section>
+
+<section class="section" id="features">
+    <span class="tagline">OUR FEATURES</span>
+    <h2>Everything you need to improve your resume</h2>
+
+    <div class="grid">
+        {% for icon, title, desc in [
+            ('📄', 'Resume Analysis', 'Extract skills and information from PDF resumes.'),
+            ('🧠', 'AI Job Matching', 'Compare resume and job description using MiniLM.'),
+            ('🎯', 'Skill Gap Detection', 'Identify matching and missing skills.'),
+            ('✨', 'Smart Suggestions', 'Get recommendations to improve your resume.')
+        ] %}
+        <article class="card">
+            <h2>{{ icon }}</h2>
+            <h3>{{ title }}</h3>
+            <p>{{ desc }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section process">
+    <span class="tagline">SIMPLE PROCESS</span>
+    <h2>How ResumeAI Works</h2>
+
+    <div class="grid">
+        <article class="card"><h3>01. Upload Resume</h3><p>Upload your PDF resume.</p></article>
+        <article class="card"><h3>02. Add Job Description</h3><p>Enter your target job requirements.</p></article>
+        <article class="card"><h3>03. Get AI Insights</h3><p>Receive semantic matching results.</p></article>
+    </div>
+
+    <a href="{{ url_for('analyze') }}" class="btn">Get Started →</a>
+</section>
+
+{% endblock %}

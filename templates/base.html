@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ResumeAI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="{{ url_for('home') }}" class="logo">Resume<span>AI.</span></a>
+    <a href="{{ url_for('analyze') }}" class="nav-link">Analyze Resume</a>
+</nav>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <h2>ResumeAI.</h2>
+    <p>Make your next career move smarter.</p>
+    <small>© 2026 ResumeAI. All rights reserved.</small>
+</footer>
+
+</body>
+</html>

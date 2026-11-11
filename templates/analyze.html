@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% block title %}Analyze Resume | ResumeAI{% endblock %}
+
+{% block content %}
+<section class="form-container">
+    <span class="tagline">AI RESUME ANALYSIS</span>
+    <h1>Let's analyze your resume</h1>
+    <p>Upload your PDF and enter your target job description.</p>
+s
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="{{ url_for('analyze') }}" method="POST" enctype="multipart/form-data">
+
+        <label for="resume">01. Upload Resume</label>
+        <input type="file" id="resume" name="resume" accept=".pdf" required>
+
+        <label for="job_description">02. Job Description</label>
+        <textarea id="job_description" name="job_description"
+            placeholder="Paste the job description here..."
+            required></textarea>
+
+        <button type="submit" class="btn">Analyze My Resume</button>
+    </form>
+</section>
+{% endblock %}

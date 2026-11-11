@@ -1,0 +1,188 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --primary: #6952d9;
+    --dark: #211b35;
+    --text: #6d687b;
+    --light: #f2efff;
+    --border: #e9e6f1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: Inter, sans-serif;
+    background: #fbfaff;
+    color: var(--dark);
+    line-height: 1.7;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.navbar {
+    padding: 18px 8%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo { font-size: 24px; font-weight: 800; }
+.logo span, .tagline { color: var(--primary); }
+.nav-link { color: var(--primary); font-weight: 600; }
+
+main { min-height: 70vh; }
+
+.hero {
+    padding: 90px 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    background: linear-gradient(120deg, #fbfaff, #f0ebff);
+}
+
+.hero h1 { font-size: clamp(38px, 5vw, 60px); line-height: 1.2; margin: 20px 0; }
+.hero h1 span { color: var(--primary); }
+.hero p { color: var(--text); margin: 20px 0; }
+
+.tagline { font-size: 12px; font-weight: 800; letter-spacing: 1.5px; }
+
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 23px;
+    margin-top: 18px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+}
+
+.btn:hover { background: #5039bd; }
+
+.preview-card, .card, .form-container {
+    background: white;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(40,30,80,.04);
+}
+
+.preview-card { max-width: 390px; }
+.preview-card h3 { margin: 20px 0 10px; }
+.preview-card p { padding: 6px 0; }
+
+.score {
+    width: 145px;
+    height: 145px;
+    border: 10px solid #ded7ff;
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 25px auto;
+    color: var(--primary);
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.section { padding: 75px 10%; text-align: center; }
+.section h2 { margin: 15px 0 30px; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-top: 30px;
+}
+
+.card h3 { margin: 12px 0; }
+.card p { color: var(--text); font-size: 14px; }
+.card { text-align: left; }
+.process { background: var(--light); }
+.process .grid { grid-template-columns: repeat(3, 1fr); }
+
+.form-container {
+    max-width: 800px;
+    margin: 55px auto;
+    padding: 35px;
+}
+
+.form-container > h1 { margin: 12px 0; }
+.form-container > p { color: var(--text); margin-bottom: 25px; }
+
+form label {
+    display: block;
+    font-weight: 600;
+    margin: 22px 0 10px;
+}
+
+input[type="file"], textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fdfcff;
+    font: inherit;
+}
+
+textarea { height: 190px; resize: vertical; }
+input:focus, textarea:focus { outline: 2px solid #ded7ff; border-color: var(--primary); }
+form .btn { width: 100%; }
+
+.error {
+    background: #fff0f0;
+    color: #a62e2e;
+    padding: 14px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.success {
+    color: #16824d;
+    background: #e0f7e9;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    display: grid;
+    place-items: center;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.form-container .card { margin: 22px 0; }
+.extracted-text {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 350px;
+    overflow-y: auto;
+    font: 14px/1.8 Inter, sans-serif;
+    color: var(--text);
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    padding: 35px 15px;
+    text-align: center;
+}
+
+footer small { color: #c5bfd6; }
+
+@media(max-width: 800px) {
+    .hero { grid-template-columns: 1fr; padding: 60px 7%; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width: 550px) {
+    .hero { padding: 45px 6%; }
+    .section { padding: 55px 6%; }
+    .grid, .process .grid { grid-template-columns: 1fr; }
+    .form-container { margin: 30px 12px; padding: 22px; }
+}

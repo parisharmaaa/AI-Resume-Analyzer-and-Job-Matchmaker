@@ -1,0 +1,48 @@
+
+{% extends "base.html" %}
+{% block title %}Analysis Results | ResumeAI{% endblock %}
+
+{% block content %}
+<section class="form-container">
+    <span class="tagline">AI ANALYSIS COMPLETED</span>
+    <h1>Your Resume Analysis</h1>
+    <p>Resume: {{ resume_name }}</p>
+
+    <article class="card">
+        <h2>{{ match_score }}%</h2>
+        <h3>Resume–Job Similarity</h3>
+        <p>Indicative semantic similarity based on MiniLM embeddings. This is not an ATS score or hiring probability.</p>
+    </article>
+
+    <article class="card">
+        <h3>Matched Skills ({{ matched_skills|length }})</h3>
+        {% if matched_skills %}
+            {% for skill in matched_skills %}
+                <p>✓ {{ skill }}</p>
+            {% endfor %}
+        {% else %}
+            <p>No matching skills detected.</p>
+        {% endif %}
+    </article>
+
+    <article class="card">
+        <h3>Missing Skills ({{ missing_skills|length }})</h3>
+        {% if missing_skills %}
+            {% for skill in missing_skills %}
+                <p>✕ {{ skill }}</p>
+            {% endfor %}
+        {% else %}
+            <p>No missing skills detected from our skill list.</p>
+        {% endif %}
+    </article>
+
+    <article class="card">
+        <h3>Improvement Suggestions</h3>
+        {% for suggestion in suggestions %}
+            <p>• {{ suggestion }}</p>
+        {% endfor %}
+    </article>
+
+    <a href="{{ url_for('analyze') }}" class="btn">Analyze Another Resume</a>
+</section>
+{% endblock %}
