@@ -1,28 +1,199 @@
-
 {% extends "base.html" %}
+
 {% block title %}Analyze Resume | ResumeAI{% endblock %}
 
 {% block content %}
-<section class="form-container">
-    <span class="tagline">AI RESUME ANALYSIS</span>
-    <h1>Let's analyze your resume</h1>
-    <p>Upload your PDF and enter your target job description.</p>
-s
-    {% if error %}
-        <div class="error">{{ error }}</div>
-    {% endif %}
 
-    <form action="{{ url_for('analyze') }}" method="POST" enctype="multipart/form-data">
+<section class="analyze-page">
 
-        <label for="resume">01. Upload Resume</label>
-        <input type="file" id="resume" name="resume" accept=".pdf" required>
+    <div class="analyze-heading">
+        <span class="section-label">AI RESUME ANALYSIS</span>
 
-        <label for="job_description">02. Job Description</label>
-        <textarea id="job_description" name="job_description"
-            placeholder="Paste the job description here..."
-            required></textarea>
+        <h1>Let's build your <span>career advantage.</span></h1>
 
-        <button type="submit" class="btn">Analyze My Resume</button>
-    </form>
+        <p>
+            Upload your resume and enter your target job description
+            to discover how well your profile matches.
+        </p>
+    </div>
+
+    <div class="form-container">
+
+        <form action="{{ url_for('analyze') }}"
+              method="POST"
+              enctype="multipart/form-data"
+              id="resumeForm">
+
+            <div class="form-section">
+
+                <label class="form-label">
+                    <span class="step-number">01</span>
+                    Upload Your Resume
+                </label>
+
+                <label for="resumeFile" class="upload-area" id="uploadArea">
+
+                    <div class="upload-icon">☁</div>
+
+                    <h3>Drag and drop your resume here</h3>
+
+                    <p>or click to browse your files</p>
+
+                    <span class="file-format">PDF FILES ONLY</span>
+
+                    <input type="file"
+                           id="resumeFile"
+                           name="resume"
+                           accept=".pdf,application/pdf"
+                           required>
+
+                    <div id="fileName" class="file-name">
+                        No file selected
+                    </div>
+
+                </label>
+
+            </div>
+
+
+            <div class="form-section">
+
+                <label class="form-label" for="jobDescription">
+                    <span class="step-number">02</span>
+                    Target Job Description
+                </label>
+
+                <textarea
+                    id="jobDescription"
+                    name="job_description"
+                    placeholder="Paste the job description here...
+
+Example:
+We are looking for a Python developer with knowledge of
+Machine Learning, SQL, Flask and Data Analysis..."
+                    required></textarea>
+
+                <div class="textarea-footer">
+                    <span>Be specific for better analysis.</span>
+                    <span id="charCount">0 characters</span>
+                </div>
+
+            </div>
+
+
+            <button type="submit"
+                    class="primary-btn analyze-btn"
+                    id="analyzeBtn">
+
+                <span id="buttonText">✨ Analyze My Resume</span>
+
+            </button>
+
+            <p class="privacy-note">
+                🔒 Your resume is used for analysis only.
+            </p>
+
+        </form>
+
+    </div>
+
 </section>
+
+
+<script>
+
+const fileInput = document.getElementById("resumeFile");
+const uploadArea = document.getElementById("uploadArea");
+const fileName = document.getElementById("fileName");
+
+fileInput.addEventListener("change", function() {
+    showFile(this.files[0]);
+});
+
+function showFile(file) {
+
+    if (!file) return;
+
+    if (file.type !== "application/pdf" &&
+        !file.name.toLowerCase().endsWith(".pdf")) {
+
+        alert("Please upload a PDF file.");
+        fileInput.value = "";
+        fileName.textContent = "No file selected";
+        return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+        alert("File size must be below 10 MB.");
+        fileInput.value = "";
+        fileName.textContent = "No file selected";
+        return;
+    }
+
+    fileName.textContent = "✓ " + file.name;
+    uploadArea.classList.add("file-selected");
+}
+
+
+// Drag and drop functionality
+
+uploadArea.addEventListener("dragover", function(e) {
+    e.preventDefault();
+    uploadArea.classList.add("dragging");
+});
+
+uploadArea.addEventListener("dragleave", function() {
+    uploadArea.classList.remove("dragging");
+});
+
+uploadArea.addEventListener("drop", function(e) {
+
+    e.preventDefault();
+    uploadArea.classList.remove("dragging");
+
+    const files = e.dataTransfer.files;
+
+    if (files.length) {
+        fileInput.files = files;
+        showFile(files[0]);
+    }
+
+});
+
+
+// Character counter
+
+const jobDescription = document.getElementById("jobDescription");
+const charCount = document.getElementById("charCount");
+
+jobDescription.addEventListener("input", function() {
+    charCount.textContent = this.value.length + " characters";
+});
+
+
+// Loading animation on submission
+
+document.getElementById("resumeForm").addEventListener("submit", function(e) {
+
+    if (!fileInput.files.length) {
+        e.preventDefault();
+        alert("Please select your resume.");
+        return;
+    }
+
+    if (!fileInput.files[0].name.toLowerCase().endsWith(".pdf")) {
+        e.preventDefault();
+        alert("Please upload a PDF file.");
+        return;
+    }
+
+    const button = document.getElementById("analyzeBtn");
+    button.disabled = true;
+    document.getElementById("buttonText").textContent =
+        "⏳ Analyzing your resume...";
+
+});
+
+</script>
+
 {% endblock %}

@@ -1,62 +1,223 @@
 
 {% extends "base.html" %}
 
-{% block title %}Home | ResumeAI{% endblock %}
+{% block title %}ResumeAI | Smart Resume Analyzer{% endblock %}
 
 {% block content %}
 
 <section class="hero">
-    <div>
-        <span class="tagline">AI POWERED CAREER ASSISTANT</span>
-        <h1>Your Resume.<br>Your Career.<br><span>Enhanced by AI.</span></h1>
-        <p>Analyze your resume, discover skill gaps and understand how well your profile matches your dream job using AI.</p>
-        <a href="{{ url_for('analyze') }}" class="btn">
-        Analyze My Resume →</a>
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                ✨ AI POWERED CAREER ASSISTANT
+            </div>
+
+            <h1>
+                Your Resume.<br>
+                Your Career.<br>
+                <span>Enhanced by AI.</span>
+            </h1>
+            <p class="hero-description">
+                Unlock your career potential with intelligent resume
+                analysis. Discover skill gaps, improve your profile
+                and get closer to your dream job.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="{{ url_for('analyze') }}" class="primary-btn">
+                    Analyze My Resume →
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Explore Features
+                </a>
+            </div>
+
+            <div class="hero-trust">
+                <span>✓ Smart Analysis</span>
+                <span>✓ Skill Matching</span>
+                <span>✓ Career Insights</span>
+            </div>
+
+        </div>
+
+        <div class="hero-visual">
+
+            <div class="floating-card card-top">
+                <span class="card-icon">✦</span>
+                AI Powered Analysis
+            </div>
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-header">
+                    <div>
+                        <small>RESUME ANALYSIS</small>
+                        <h3>Your Career Dashboard</h3>
+                    </div>
+                    <span class="status-dot"></span>
+                </div>
+
+                <div class="score-circle">
+                    <div class="score-inner">
+                        <strong>85%</strong>
+                        <small>Match Score</small>
+                    </div>
+                </div>
+
+                <div class="skill-heading">
+                    <h4>Skill Compatibility</h4>
+                    <span>Sample preview</span>
+                </div>
+
+                <div class="skill-row">
+                    <span>Python</span>
+                    <div class="skill-track">
+                        <div style="width:90%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-row">
+                    <span>Machine Learning</span>
+                    <div class="skill-track">
+                        <div style="width:75%"></div>
+                    </div>
+                </div>
+
+                <div class="skill-row">
+                    <span>SQL</span>
+                    <div class="skill-track">
+                        <div style="width:85%"></div>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    ✨ Improve your skills and stand out to employers.
+                </div>
+
+                <small class="sample-note">
+                    Illustrative preview, not an actual analysis.
+                </small>
+
+            </div>
+
+            <div class="floating-card card-bottom">
+                <span>✓</span> Smart Career Insights
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="preview-card">
-        <span class="tagline">SAMPLE DASHBOARD</span>
-        <div class="score">85%</div>
-        <h3>Skill Compatibility</h3>
-        <p>✓ Python</p>
-        <p>✓ Machine Learning</p>
-        <p>✓ SQL</p>
-        <p>✕ Docker</p>
-        <small>Illustrative score, not an actual analysis.</small>
-    </div>
 </section>
 
-<section class="section" id="features">
-    <span class="tagline">OUR FEATURES</span>
-    <h2>Everything you need to improve your resume</h2>
 
-    <div class="grid">
-        {% for icon, title, desc in [
-            ('📄', 'Resume Analysis', 'Extract skills and information from PDF resumes.'),
-            ('🧠', 'AI Job Matching', 'Compare resume and job description using MiniLM.'),
-            ('🎯', 'Skill Gap Detection', 'Identify matching and missing skills.'),
-            ('✨', 'Smart Suggestions', 'Get recommendations to improve your resume.')
-        ] %}
-        <article class="card">
-            <h2>{{ icon }}</h2>
-            <h3>{{ title }}</h3>
-            <p>{{ desc }}</p>
-        </article>
-        {% endfor %}
+<section class="features-section" id="features">
+
+    <div class="section-heading reveal">
+        <span class="section-label">OUR FEATURES</span>
+
+        <h2>
+            Everything you need to<br>
+            <span>improve your resume</span>
+        </h2>
+
+        <p>
+            Powerful AI tools to help you create a stronger
+            professional profile.
+        </p>
     </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">📄</div>
+            <h3>Resume Analysis</h3>
+            <p>
+                Upload your resume and let AI evaluate your
+                professional profile.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🎯</div>
+            <h3>ATS Compatibility</h3>
+            <p>
+                Understand how well your resume matches
+                your target job description.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">🧠</div>
+            <h3>Skill Gap Detection</h3>
+            <p>
+                Identify missing skills and discover
+                opportunities for improvement.
+            </p>
+        </div>
+
+        <div class="feature-card reveal">
+            <div class="feature-icon">💡</div>
+            <h3>Smart Suggestions</h3>
+            <p>
+                Receive useful recommendations to make
+                your resume stronger.
+            </p>
+        </div>
+
+    </div>
+
 </section>
 
-<section class="section process">
-    <span class="tagline">SIMPLE PROCESS</span>
-    <h2>How ResumeAI Works</h2>
 
-    <div class="grid">
-        <article class="card"><h3>01. Upload Resume</h3><p>Upload your PDF resume.</p></article>
-        <article class="card"><h3>02. Add Job Description</h3><p>Enter your target job requirements.</p></article>
-        <article class="card"><h3>03. Get AI Insights</h3><p>Receive semantic matching results.</p></article>
+<section class="process-section">
+
+    <div class="section-heading">
+        <span class="section-label">HOW IT WORKS</span>
+        <h2>Three simple steps to <span>stand out</span></h2>
     </div>
 
-    <a href="{{ url_for('analyze') }}" class="btn">Get Started →</a>
+    <div class="process-grid">
+
+        <div class="process-card">
+            <span>01</span>
+            <h3>Upload Resume</h3>
+            <p>Upload your existing resume in PDF format.</p>
+        </div>
+
+        <div class="process-card">
+            <span>02</span>
+            <h3>Add Job Description</h3>
+            <p>Enter the job description you want to target.</p>
+        </div>
+
+        <div class="process-card">
+            <span>03</span>
+            <h3>Get AI Insights</h3>
+            <p>Explore your resume match and improvement suggestions.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="cta-section">
+
+    <h2>Ready to upgrade your career?</h2>
+
+    <p>
+        Take the first step towards a stronger professional future.
+    </p>
+
+    <a href="{{ url_for('analyze') }}" class="primary-btn">
+        Start Analyzing Now →
+    </a>
+
 </section>
 
 {% endblock %}

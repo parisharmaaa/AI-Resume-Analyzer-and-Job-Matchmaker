@@ -3,46 +3,97 @@
 {% block title %}Analysis Results | ResumeAI{% endblock %}
 
 {% block content %}
+
 <section class="form-container">
+
     <span class="tagline">AI ANALYSIS COMPLETED</span>
     <h1>Your Resume Analysis</h1>
     <p>Resume: {{ resume_name }}</p>
 
+    <!-- Overall Score -->
     <article class="card">
         <h2>{{ match_score }}%</h2>
         <h3>Resume–Job Similarity</h3>
-        <p>Indicative semantic similarity based on MiniLM embeddings. This is not an ATS score or hiring probability.</p>
+        <p>
+            Indicative semantic similarity based on MiniLM embeddings.
+            This is not an ATS score or hiring probability.
+        </p>
     </article>
 
+    <!-- Matched Skills -->
     <article class="card">
         <h3>Matched Skills ({{ matched_skills|length }})</h3>
-        {% if matched_skills %}
-            {% for skill in matched_skills %}
-                <p>✓ {{ skill }}</p>
-            {% endfor %}
+
+        {% for skill in matched_skills %}
+            <p>✓ {{ skill }}</p>
         {% else %}
             <p>No matching skills detected.</p>
-        {% endif %}
-    </article>
-
-    <article class="card">
-        <h3>Missing Skills ({{ missing_skills|length }})</h3>
-        {% if missing_skills %}
-            {% for skill in missing_skills %}
-                <p>✕ {{ skill }}</p>
-            {% endfor %}
-        {% else %}
-            <p>No missing skills detected from our skill list.</p>
-        {% endif %}
-    </article>
-
-    <article class="card">
-        <h3>Improvement Suggestions</h3>
-        {% for suggestion in suggestions %}
-            <p>• {{ suggestion }}</p>
         {% endfor %}
     </article>
 
-    <a href="{{ url_for('analyze') }}" class="btn">Analyze Another Resume</a>
+    <!-- Missing Skills -->
+    <article class="card">
+        <h3>Missing Skills ({{ missing_skills|length }})</h3>
+
+        {% for skill in missing_skills %}
+            <p>✕ {{ skill }}</p>
+        {% else %}
+            <p>No missing skills detected from our skill list.</p>
+        {% endfor %}
+    </article>
+
+    <!-- Suggestions -->
+    <article class="card">
+        <h3>Improvement Suggestions</h3>
+
+        {% for suggestion in suggestions %}
+            <p>• {{ suggestion }}</p>
+        {% else %}
+            <p>No suggestions available.</p>
+        {% endfor %}
+    </article>
+
+    <!-- Education Analysis -->
+    <details class="card">
+        <summary>
+            <h3>Education Analysis</h3>
+        </summary>
+
+        {% if education_found %}
+            <p>Education section detected.</p>
+        {% else %}
+            <p>No education section detected.</p>
+        {% endif %}
+
+        <p>
+            Matching terms:
+            {{ education_matches|join(", ") or "None detected" }}
+        </p>
+    </details>
+
+    <!-- Experience Analysis -->
+    <details class="card">
+        <summary>
+            <h3>Experience Analysis</h3>
+        </summary>
+
+        <p>{{ experience_status }}</p>
+    </details>
+
+    <!-- Project Relevance -->
+    <details class="card">
+        <summary>
+            <h3>Project Relevance</h3>
+        </summary>
+
+        <h2>{{ project_score }}%</h2>
+        <p>Semantic similarity between projects and job requirements.</p>
+    </details>
+
+    <a href="{{ url_for('analyze') }}" class="btn">
+        Analyze Another Resume
+    </a>
+
 </section>
+
 {% endblock %}

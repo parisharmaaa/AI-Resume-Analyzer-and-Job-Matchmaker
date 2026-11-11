@@ -3,25 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}ResumeAI{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='CSS/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
 </head>
+
 <body>
 
 <nav class="navbar">
-    <a href="{{ url_for('home') }}" class="logo">Resume<span>AI.</span></a>
-    <a href="{{ url_for('analyze') }}" class="nav-link">Analyze Resume</a>
+    <div class="nav-container">
+
+        <a href="{{ url_for('home') }}" class="logo"></a>
+            Resume<span>AI.</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('analyze') }}">Analyze Resume</a>
+            <a href="{{ url_for('home') }}#features">Features</a>
+        </div>
+
+        <a href="{{ url_for('analyze') }}" class="nav-btn">
+            Get Started →
+        </a>
+
+    </div>
 </nav>
 
 <main>
     {% block content %}{% endblock %}
 </main>
 
-<footer>
-    <h2>ResumeAI.</h2>
-    <p>Make your next career move smarter.</p>
-    <small>© 2026 ResumeAI. All rights reserved.</small>
+<footer class="footer">
+    <h3>Resume<span>AI.</span></h3>
+    <p>Your career journey, enhanced by artificial intelligence.</p>
+    <p class="copyright">© 2026 ResumeAI. All rights reserved.</p>
 </footer>
+
+<script>
+    // Reveal elements when they enter the screen
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(element => {
+        observer.observe(element);
+    });
+</script>
 
 </body>
 </html>
